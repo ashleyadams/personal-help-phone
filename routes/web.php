@@ -11,6 +11,20 @@
 |
 */
 
+Route::group(
+    [
+        'prefix' => 'caller'
+    ],
+    function()
+    {
+        Route::get('/', [
+           'uses' =>  'CallerController@index'
+        ]);
+    }
+);
+
+
+
 $router->get('/', function () use ($router) {
     return 'personal-help-phone 1.0';
 });
