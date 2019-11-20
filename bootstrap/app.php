@@ -79,6 +79,7 @@ $app->routeMiddleware([
 |
 */
 
+$app->register(App\Providers\DatabaseServiceProvider::class);
 $app->register(App\Providers\TwilioServiceProvider::class);
 
 
