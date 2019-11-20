@@ -18,3 +18,7 @@ The purpose of this application is to allow a range of personal "emergency" cont
 
 - Twilio account with a phone number - doesn't have to be toll free
 - Public facing PHP enabled environment which Twilio services can reach
+
+The Docker container will serve requests on port 86 externally. Use ngrok to allow Twilio to see your local dev environment.
+
+

@@ -11,18 +11,9 @@
 |
 */
 
-Route::group(
-    [
-        'prefix' => 'caller'
-    ],
-    function()
-    {
-        Route::get('/', [
-           'uses' =>  'CallerController@index'
-        ]);
-    }
-);
-
+$router->group(['prefix' => 'caller', 'middleware' => 'CheckIP'], function () use ($router) {
+    $router->get('/', 'CallerController@index');
+});
 
 
 $router->get('/', function () use ($router) {

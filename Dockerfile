@@ -49,10 +49,7 @@ RUN chmod +x /usr/local/bin/dumb-init
 COPY docker/config/timezone.ini /etc/php.d/
 COPY docker/config/xdebug.ini /etc/php.d/
 
-# Set up SSL
-COPY docker/config/req.conf /root/bin/
-RUN mkdir /etc/httpd/ssl
-RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/httpd/ssl/ssl.key -out /etc/httpd/ssl/ssl.crt -config /root/bin/req.conf -extensions 'v3_req'
+# Set up Apache site
 COPY docker/config/000-default.conf /etc/httpd/conf.d/000-default.conf
 
 # To avoid problems with firewalls
@@ -74,7 +71,7 @@ ENV container docker
 WORKDIR /var/www/html
 VOLUME /var/www/html
 
-EXPOSE 80 443
+EXPOSE 80
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
 CMD ["sh", "/root/bin/start-webserver-container.sh"]
