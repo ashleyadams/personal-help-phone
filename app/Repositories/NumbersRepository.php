@@ -3,14 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\Numbers;
+use App\Models\Roles;
 
 class NumbersRepository implements NumbersRepositoryInterface
 {
     protected $numbersModel;
+    protected $rolesModel;
 
-    public function __construct(Numbers $numbersModel)
+    public function __construct(Numbers $numbersModel, Roles $rolesModel)
     {
         $this->numbersModel = $numbersModel;
+        $this->rolesModel = $rolesModel;
     }
 
     /**
@@ -19,7 +22,9 @@ class NumbersRepository implements NumbersRepositoryInterface
      */
     public function getOwnerNumber() {
 
-        $number = $this->numbersModel->with('Roles')->where('role_name', '=', 'owner')->first();
+        $number = $this->numbersModel->with(['roles' => function ($query) {
+            $query->where('role_name', '=', 'owner');
+        }])->first();
 
         if ($number) {
             return $number->number;
@@ -37,10 +42,9 @@ class NumbersRepository implements NumbersRepositoryInterface
      */
     public function numberHasRole($number, $role) {
 
-        $result = $this->numbersModel->with('Roles')
-            ->where('role_name', '=', $role)
-            ->where('number', '=', $number)
-            ->first();
+        $result = $this->numbersModel->with(['roles' => function ($query) use ($role) {
+            $query->where('role_name', '=', $role);
+        }])->where('number', '=', $number)->first();
 
         return ($result !== null);
 

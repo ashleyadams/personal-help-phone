@@ -13,7 +13,7 @@ class Numbers extends Model
 
     public function roles()
     {
-        return $this->belongsToMany('Role', 'numbers_roles');
+        return $this->belongsToMany('App\Models\Roles', 'numbers_roles', 'number_id', 'role_id');
     }
 
 }

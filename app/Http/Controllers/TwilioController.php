@@ -31,9 +31,11 @@ class TwilioController extends BaseController
     }
 
     protected function getCaller() {
-        if ($this->caller === null) {
+        if ($this->caller == null && array_key_exists('From', $_REQUEST)) {
             $this->caller = $_REQUEST['From'];
         }
+
+        return $this->caller;
     }
 
 
