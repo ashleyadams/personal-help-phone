@@ -12,6 +12,8 @@ I have commented out the instantiation of the Twilio client so that the project 
 
 In its present state the project is over-engineered for its specific purpose (some vanilla php without a database may have been suitable) but at the same time under-developed for any broader purpose.
 
+- Unit tests really should be present!
+
 - Management UI - A web-based UI to edit/change phone numbers
 
 - Change pin during call

@@ -1,24 +1,21 @@
 # personal-help-phone ;)
-A Twilio app allowing flexible contact options to/from the owner of a toll free number.
+An app providing a simple IVR (interactive voice response) system for a programmable phone number using the Twilio service.
 
-Uses Lumen framework and Twilio SDK.
+The specific purpose is to allow someone with a free phone number on their account to dial in and contact friends/family after entering a pin.
 
-### Overview
+Caller ID recognition would allow bypass of the pin entry but if you have your own phone you probably have your contacts set up and sufficient allowance to make a call! 
+However if you don't have your phone or the battery is dead you can use another phone or payphone and call the freephone Twilio number (on your account). With this you can then contact designated numbers without needing to remember them. Useful in minor emergencies!
 
-When someone calls a Twilio phone number, a call is made to a webhook which responds with TwiML (Twilio Markup Language) describing how the call should be handled.
+Other users who are recognised by the system can dial in and reach the owner by recognising caller ID and the system will then route the call. Or if the incoming number is completely unrecognised a pin will allow this access.
 
-The purpose of this application is to allow a range of personal "emergency" contact actions the owner of a toll-free number could use in the event they have lost access to their regular phone or contacts, or allow friends/family to reach the user if they call that number.
+Uses Lumen framework and Twilio SDK. 
 
-- Detect caller id and allow the designated owner of the Twilio number to contact a shortlist of friends/family without knowing their phone numbers.
-- Allow any caller id with the correct owner-pin to also perform owner actions (e.g. owner is calling from a payphone)
-- Allow specific identified callers to directly reach the owner phone number
-- Allow other callers to call the owner with the correct user-pin
 
 ### Requirements
 
-- Twilio account with a phone number - doesn't have to be toll free
+- Twilio account with a phone number - doesn't have to be free phone 
 - Public facing PHP enabled environment which Twilio services can reach
+- Phone number needs to be set up on Twilio to make a webhook request to the project's endpoint:    /caller
 
 The Docker container will serve requests on port 86 externally. Use ngrok to allow Twilio to see your local dev environment.
-
 
